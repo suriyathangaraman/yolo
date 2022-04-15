@@ -1,14 +1,15 @@
-const countryModel = require('./country/country.model');
+const {countryModel} = require('./country/country.model');
 
 let schema = [];
 
  schema.push(
-  {model: "countryModel", table: "countries", path: countryModel}
+  {model: "countryModel", table: "country", path: countryModel}
 ); 
 
 let utils = {
-    paranoid: true,
-    underscored: true
+  paranoid: true,
+  underscored: true,
+  freezeTableName: true,
 };
 
 module.exports = { schema, utils };

@@ -9,10 +9,10 @@ countryModel.schema = {
         defaultValue: DataTypes.UUIDV4,
         unique: true,
     },
-    country_name: { type: DataTypes.STRING, allowNull: false, unique: true},
+    country_name: { type: DataTypes.STRING, allowNull: false},
     status: { type: DataTypes.STRING }, 
     created_by: { type: DataTypes.STRING},
-    modified_date: { type: DataTypes.STRING },
+    modified_by: { type: DataTypes.STRING },
 };
 
 countryModel.utils = {};

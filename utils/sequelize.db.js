@@ -11,6 +11,12 @@ const sequelize = new Sequelize(process.env.DATABASE, process.env.USER_NAME,proc
       acquire: 30000,
       idle: 10000
   },
+  logging: false,
+  define: {
+    timestamps: true,
+    freezeTableName: true,
+    underscored: true,
+  },
   
   });
   
@@ -19,6 +25,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 schema.forEach(x => {
+    console.log('x.path.schema ==', x.path.schema)
     db[x.model] = sequelize.define(x.table, x.path.schema, x.path.utils);
     db[x.model].associate = x.path.associate;
 });
