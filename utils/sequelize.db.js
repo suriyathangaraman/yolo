@@ -2,18 +2,16 @@ const Sequelize = require("sequelize");
 const { schema, utils } = require("../src/models/index.model");
 
 const sequelize = new Sequelize(process.env.DATABASE, process.env.USER_NAME,process.env.PASSWORD, {
-    dialect: 'mssql',
-    dialectOptions: {
-      // Observe the need for this nested `options` field for MSSQL
-      options: {
-        // Your tedious options here
-        port: 49175,
-    database: 'yolo',
-    instancename: 'SQLEXPRESS',
-        useUTC: false,
-        dateFirst: 1
-      }
-    }
+    
+    host: process.env.DB_HOST,
+    dialect: "mssql",
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+  },
+  
   });
   
 const db = {};
