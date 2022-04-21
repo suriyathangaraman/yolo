@@ -24,18 +24,28 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+
 schema.forEach(x => {
-    console.log('x.path.schema ==', x.path.schema)
+
     db[x.model] = sequelize.define(x.table, x.path.schema, x.path.utils);
     db[x.model].associate = x.path.associate;
 });
 
-Object.keys(db).forEach(function (modelName) {
+/* Object.keys(db).forEach(function (modelName) {
     if (modelName != 'Sequelize' && modelName != 'sequelize') {
         if (db[modelName].associate) {
             db[modelName].associate(db[modelName], db)
         }
     }
-})
+}) */
+
+
+// associations
+
+db.countryModel.hasOne(db.stateModel, {foreignKey: 'country_Id'})
+db.stateModel.belongsTo(db.countryModel, {foreignKey: 'country_Id'})
+
+db.sequelize.sync({alter: true}).then(()=>{}).catch(err=>console.log(err))
+
 
 module.exports = db;
