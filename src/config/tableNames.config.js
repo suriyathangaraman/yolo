@@ -4,7 +4,7 @@ const tabelNames = {
     cityMaster: 'city_master',
     areaMaster: 'area_master',
     guestMaster: 'guest_master',
-    guestCredMaster: 'guest_credential_deatils_master'
+    guestCredMaster: 'guest_credential_deatils'
 }
 
 module.exports = {tabelNames}

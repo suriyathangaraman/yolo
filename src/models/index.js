@@ -29,6 +29,7 @@ db.stateModel = require('./state/state.model')(sequelize, Sequelize);
 db.cityModel = require('./city/city.model')(sequelize, Sequelize);
 db.areaModel = require('./area/area.model')(sequelize, Sequelize);
 db.guest_master_model = require('./guest/guest_master.model')(sequelize, Sequelize)
+db.guest_cred_master_model = require('./guest/guest_credential.model')(sequelize, Sequelize);
 
 db.countryModel.hasOne(db.stateModel, {foreignKey: 'country_Id'});
 db.stateModel.belongsTo(db.countryModel, {foreignKey: 'country_Id'});
@@ -41,6 +42,10 @@ db.areaModel.belongsTo(db.cityModel, { foreignKey: 'city_Id'});
 
 db.areaModel.hasMany(db.guest_master_model, {foreignKey: 'area_Id'});
 db.guest_master_model.belongsTo(db.areaModel, {foreignKey: 'area_Id'})
+
+db.guest_master_model.hasMany(db.guest_cred_master_model,{foreignKey: 'guest_Id'} );
+db.guest_cred_master_model.belongsTo(db.guest_master_model, {foreignKey: 'guest_Id'})
+
 
 
 module.exports = db;
