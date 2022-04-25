@@ -3,7 +3,7 @@ const path = require("path");
 const cors = require("cors");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 const app = express();
-const db = require('./utils/sequelize.db');
+const db = require('./src/models');
 const routes = require('./src/routes/index.route');
 var morgan = require('morgan')
 

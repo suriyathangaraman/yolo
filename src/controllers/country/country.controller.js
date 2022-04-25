@@ -1,4 +1,4 @@
-const db = require("../../../utils/sequelize.db");
+const db = require('../../models');
 const commonService = require("../../services/commonService");
 const { ERRORS, SUCCESS, Op } = require("../../helpers/index.helper");
 const { successRes, errorRes } = require("../../middlewares/response.middleware")
