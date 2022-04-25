@@ -1,10 +1,12 @@
  const { Sequelize, DataTypes } = require("sequelize");
- const { stateModel } = require('../state/state.model')
+ const { stateModel } = require('../state/state.model');
+ const { tabelNames} = require('../../config/tableNames.config');
+
 
 
 module.exports = (sequelize, Sequelize) => {
 
-    const countryModel = sequelize.define("country", {
+    const countryModel = sequelize.define(tabelNames.countryMaster, {
         country_Id: {
             type: DataTypes.UUID,
             primaryKey: true,

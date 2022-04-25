@@ -1,8 +1,9 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const { tabelNames} = require('../../config/tableNames.config');
 
 module.exports = (sequelize, Sequelize) => {
 
-    const cityModel = sequelize.define("city", {
+    const cityModel = sequelize.define(tabelNames.cityMaster, {
             city_Id: {
             type: DataTypes.UUID,
             primaryKey: true,

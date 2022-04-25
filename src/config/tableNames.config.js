@@ -1,4 +1,4 @@
-export const tabelNames = {
+const tabelNames = {
     countryMaster: 'country_master',
     stateMaster: 'state_master',
     cityMaster: 'city_master',
@@ -6,3 +6,5 @@ export const tabelNames = {
     guestMaster: 'guest_master',
     guestCredMaster: 'guest_credential_deatils_master'
 }
+
+module.exports = {tabelNames}

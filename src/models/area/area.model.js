@@ -1,8 +1,9 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const { tabelNames} = require('../../config/tableNames.config');
 
 module.exports = (sequelize, Sequelize) => {
 
-    const areaModel = sequelize.define("area", {
+    const areaModel = sequelize.define(tabelNames.areaMaster, {
             area_Id: {
             type: DataTypes.UUID,
             primaryKey: true,
