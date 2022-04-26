@@ -29,7 +29,7 @@ module.exports = (sequelize, Sequelize) => {
             emergency_contact_no: { type: DataTypes.STRING},
             parent_login_Id: { type: DataTypes.STRING},
             profile_score: { type: DataTypes.INTEGER},
-            status: { type: DataTypes.STRING }, 
+            status: { type: DataTypes.INTEGER , default :0 }, 
             created_by: { type: DataTypes.STRING},
             modified_by: { type: DataTypes.STRING },
             
