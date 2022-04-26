@@ -3,22 +3,13 @@ const commonService = require("../../services/commonService");
 const { ERRORS, SUCCESS, Op } = require("../../helpers/index.helper");
 const { successRes, errorRes } = require("../../middlewares/response.middleware")
 const bcrypt = require ('bcrypt');
+const { comparePassword } = require('../../../utils/encryptionAndDecryption');
 const saltRounds = 10;
 
 let file = "auth.controller";
 
 
-const comparePassword = async (hashedPassword, password) =>{
-  
-  return   bcrypt.compareSync(password, hashedPassword, function(err, result) {
-        
-    if(err){
-        throw err
-    }
-    
-    return result
-    });
-}
+
 
 
 

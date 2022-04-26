@@ -6,7 +6,8 @@ require('./state/state.route')(app);
 require('./city/city.route')(app);
 require('./area/area.route')(app);
 require('./guest/guest.route')(app);
-require('./auth/auth.route')(app)
+require('./auth/auth.route')(app);
+require('./admin/admin.route')(app);
 
 
 module.exports = app;
