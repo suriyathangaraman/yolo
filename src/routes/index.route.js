@@ -9,6 +9,10 @@ require('./guest/guest.route')(app);
 require('./auth/auth.route')(app);
 require('./admin/admin.route')(app);
 require('./s3upload/s3upload.route')(app)
+require('./category/category.route')(app);
+require('./facility/facility.route')(app);
+require('./residence/residence.route')(app);
+require('./property/property.route')(app);
 
 
 module.exports = app;
