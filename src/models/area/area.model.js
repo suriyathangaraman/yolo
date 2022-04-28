@@ -14,7 +14,7 @@ module.exports = (sequelize, Sequelize) => {
                 allowNull: false,
             },
             area_name: { type: DataTypes.STRING, allowNull: false},
-            status: { type: DataTypes.INTEGER , default :0 }, 
+            status: { type: DataTypes.INTEGER , default :1 }, 
             created_by: { type: DataTypes.STRING},
             modified_by: { type: DataTypes.STRING }
     });

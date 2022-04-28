@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
             },
             password: { type: DataTypes.STRING, allowNull: false},
             guest_type: { type: DataTypes.STRING},
-            status: { type: DataTypes.INTEGER , default :0 }, 
+            status: { type: DataTypes.INTEGER , default :1 }, 
             created_by: { type: DataTypes.STRING},
             modified_by: { type: DataTypes.STRING }
     });
