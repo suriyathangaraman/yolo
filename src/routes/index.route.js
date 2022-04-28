@@ -8,6 +8,7 @@ require('./area/area.route')(app);
 require('./guest/guest.route')(app);
 require('./auth/auth.route')(app);
 require('./admin/admin.route')(app);
+require('./s3upload/s3upload.route')(app)
 
 
 module.exports = app;

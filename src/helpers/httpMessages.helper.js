@@ -6,7 +6,8 @@ const SUCCESS = {
     UPDATED: "Updated successfully",
     DELETED: "Deleted successfully",
     INVALID_TOKEN: "Invalid token",
-    LOGIN: "Login successfully"
+    LOGIN: "Login successfully",
+    UPLOADED: "Uploaded successfully"
 };
 
 const ERRORS = {

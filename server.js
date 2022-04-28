@@ -1,4 +1,5 @@
 const express = require("express");
+const fileUpload = require('express-fileupload');
 const path = require("path");
 const cors = require("cors");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
@@ -22,9 +23,13 @@ db.sequelize.sync({ alter: true }).then(() => {
     console.log("DB connected.");
 });
 
-app.use(express.urlencoded({ limit: "2mb", extended: true }));
-app.use(express.json({ limit: "3mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.json({ limit: "50mb" }));
+// app.use(fileUpload);
 
+app.use(fileUpload({
+    limits: { fileSize: 50 * 1024 * 1024 },
+  }));
 app.use(cors());
 app.use(morgan('combined'));
 
