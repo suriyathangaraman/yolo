@@ -93,11 +93,11 @@ db.propertyCategoryModel.belongsTo(db.propertyMasterModel, { foreignKey: 'proper
 db.propertyMasterModel.hasOne(db.propertyFacilityModel, { foreignKey: 'property_Id' });
 db.propertyFacilityModel.belongsTo(db.propertyMasterModel, { foreignKey: 'property_Id' });
 
-db.residenceTypeModel.hasOne(db.residenceMasterModel, { foreignKey: 'residence_type_Id'});
+db.residenceTypeModel.hasOne(db.residenceMasterModel, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION', foreignKey: 'residence_type_Id'});
 db.residenceMasterModel.belongsTo(db.residenceTypeModel, { foreignKey: 'residence_type_Id'});
 
-db.propertyCategoryModel.hasOne(db.residenceMasterModel, { foreignKey: 'property_category_Id'});
-db.residenceMasterModel.belongsTo(db.propertyCategoryModel, { foreignKey: 'property_category_Id'});
+db.propertyCategoryModel.hasOne(db.residenceMasterModel, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION', foreignKey: 'property_category_Id'});
+db.residenceMasterModel.belongsTo(db.propertyCategoryModel, {foreignKey: 'property_category_Id'});
 
 db.facilityModel.hasMany(db.residenceFacilityModel, { foreignKey: 'facility_Id'});
 db.residenceFacilityModel.belongsTo(db.facilityModel, { foreignKey: 'facility_Id'});
