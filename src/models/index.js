@@ -33,13 +33,25 @@ db.guest_cred_master_model = require('./guest/guest_credential.model')(sequelize
 db.adminModel = require('./admin/admin.model')(sequelize, Sequelize);
 db.facilityModel = require('./facility/facility.model')(sequelize, Sequelize);
 db.categoryModel = require('./category/category.model')(sequelize, Sequelize);
+
 db.residenceTypeModel = require('./residence/residence_type.model')(sequelize, Sequelize);
 
 db.propertyMasterModel = require('./property/property_master.model')(sequelize, Sequelize);
 db.propertyImagesModel = require('./property/property_images.model')(sequelize, Sequelize);
 db.propertyVideosModel = require('./property/property_videos.model')(sequelize, Sequelize);
-db.propertyFacilityModel = require('./property/property_facility.model')(sequelize, Sequelize);
 db.propertyCategoryModel = require('./property/property_category.model')(sequelize, Sequelize);
+db.propertyFacilityModel = require('./property/property_facility.model')(sequelize, Sequelize);
+
+
+db.residenceMasterModel = require('./residence/residence_master.model')(sequelize, Sequelize);
+db.residenceFacilityModel = require('./residence/residence_facility.model')(sequelize, Sequelize);
+db.residenceImagesModel = require('./residence/residence_images.model')(sequelize, Sequelize);
+db.residenceVideosModel = require('./residence/residence_videos.model')(sequelize, Sequelize);
+db.roomMasterModel = require('./residence/room_master.model')(sequelize, Sequelize);
+db.residencePriceMasterModel = require('./residence/residence_price_master.model')(sequelize, Sequelize);
+db.residencePriceDetailsModel = require('./residence/residence_price_details.model')(sequelize, Sequelize);
+
+
 
 
 db.countryModel.hasOne(db.stateModel, {foreignKey: 'country_Id'});
@@ -81,6 +93,35 @@ db.propertyCategoryModel.belongsTo(db.propertyMasterModel, { foreignKey: 'proper
 db.propertyMasterModel.hasOne(db.propertyFacilityModel, { foreignKey: 'property_Id' });
 db.propertyFacilityModel.belongsTo(db.propertyMasterModel, { foreignKey: 'property_Id' });
 
+db.residenceTypeModel.hasOne(db.residenceMasterModel, { foreignKey: 'residence_type_Id'});
+db.residenceMasterModel.belongsTo(db.residenceTypeModel, { foreignKey: 'residence_type_Id'});
+
+db.propertyCategoryModel.hasOne(db.residenceMasterModel, { foreignKey: 'property_category_Id'});
+db.residenceMasterModel.belongsTo(db.propertyCategoryModel, { foreignKey: 'property_category_Id'});
+
+db.facilityModel.hasMany(db.residenceFacilityModel, { foreignKey: 'facility_Id'});
+db.residenceFacilityModel.belongsTo(db.facilityModel, { foreignKey: 'facility_Id'});
+
+db.residenceMasterModel.hasMany(db.residenceFacilityModel, { foreignKey: 'residence_Id'});
+db.residenceFacilityModel.belongsTo(db.residenceMasterModel, { foreignKey: 'residence_Id'});
+
+db.residenceMasterModel.hasMany(db.residenceImagesModel, { foreignKey: 'residence_Id'});
+db.residenceImagesModel.belongsTo(db.residenceMasterModel, { foreignKey: 'residence_Id'});
+
+db.residenceMasterModel.hasMany(db.residenceVideosModel, { foreignKey: 'residence_Id'});
+db.residenceVideosModel.belongsTo(db.residenceMasterModel, { foreignKey: 'residence_Id'});
+
+db.residenceMasterModel.hasMany(db.residencePriceMasterModel, { foreignKey: 'residence_Id'});
+db.residencePriceMasterModel.belongsTo(db.residenceMasterModel, { foreignKey: 'residence_Id'});
+
+db.residenceMasterModel.hasMany(db.roomMasterModel, { foreignKey: 'residence_Id'});
+db.roomMasterModel.belongsTo(db.residenceMasterModel, { foreignKey: 'residence_Id'});
+
+db.residencePriceMasterModel.hasMany(db.residencePriceDetailsModel, { foreignKey: 'residence_price_Id'});
+db.residencePriceDetailsModel.belongsTo(db.residencePriceMasterModel, { foreignKey: 'residence_price_Id'});
+
+db.roomMasterModel.hasOne(db.residencePriceDetailsModel, { foreignKey: 'room_Id'});
+db.residencePriceDetailsModel.belongsTo(db.roomMasterModel, { foreignKey: 'room_Id'});
 
 
 module.exports = db;

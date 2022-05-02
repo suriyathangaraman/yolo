@@ -2,7 +2,9 @@ const residenceController = require('../../controllers/residence/residence.contr
 
 module.exports = (app) => {
     // Country API 
-    app.post("/residence/add", residenceController.create);
-    app.get("/residence_type/list", residenceController.get);
+    app.post("/residence/add_residence_type", residenceController.create);
+    app.get("/residence/type/list", residenceController.get);
+    app.post("/residence/create_residence", residenceController.addResidenceDetails);
+    app.post("/residence/add_price_details", residenceController.addResidencePriceDetails);
 
 }

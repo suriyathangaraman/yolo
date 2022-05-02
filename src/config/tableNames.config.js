@@ -17,8 +17,13 @@ const tabelNames = {
     propertyCategoryMapping: 'property_category_mapping',
 
 
+    residenceMaster: 'residence_master',
+    residenceFacilityMapping: 'residence_facility_mapping',
     residenceImagesMaster: 'residence_images_master',
-    residenceVideosMaster: 'residence_videos_master'
+    residenceVideosMaster: 'residence_videos_master',
+    residencePriceMaster: 'residence_price_master',
+    residencePriceDetail: 'residence_price_detail',
+    roomMaster: 'room_master'
 
 }
 
