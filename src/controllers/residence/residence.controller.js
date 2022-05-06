@@ -3,7 +3,7 @@ const commonService = require("../../services/commonService");
 const { ERRORS, SUCCESS, Op } = require("../../helpers/index.helper");
 const { successRes, errorRes } = require("../../middlewares/response.middleware")
 
-let file = "city.controller";
+let file = "residence.controller";
 
 
 
@@ -25,29 +25,29 @@ exports.create = async (req, res) => {
 
 exports.addResidenceDetails = async (req, res) => {
 
-        const t = await Sequelize.transaction();
+        const t = await db.sequelize.transaction();
     
         try {         
             
-            const result = await sequelize.transaction(async (t) => {
+            const result = await db.sequelize.transaction(async (t) => {
 
                 const residenceInfo = await db.residenceMasterModel.create(req.body.residenceDetail, { transaction: t });
 
                 const residenceFacilities = await this.addResidenceId(req.body.residenceFacilities, residenceInfo.residence_Id);
                 const residenceImages = await this.addResidenceId(req.body.residenceImages, residenceInfo.residence_Id);
                 const residenceVideos = await this.addResidenceId(req.body.residenceVideos, residenceInfo.residence_Id);
-                const residenceRooms = await this.bulkCreate(req.body.residenceRooms, residenceInfo.residence_Id);
+                const residenceRooms = await this.addResidenceId(req.body.residenceRooms, residenceInfo.residence_Id);
 
                 await db.residenceFacilityModel.bulkCreate(residenceFacilities, { transaction: t });
                 await db.residenceImagesModel.bulkCreate(residenceImages, { transaction: t });
                 await db.residenceVideosModel.bulkCreate(residenceVideos, { transaction: t});
                 await db.roomMasterModel.bulkCreate(residenceRooms,  { transaction: t});
 
-                await t.commit();
-    
-                return categoryResult;
+                   
+                return residenceInfo;
             });
     
+            await t.commit();
     
             successRes(res, result, SUCCESS.CREATED);
         } catch (error) {
@@ -60,19 +60,23 @@ exports.addResidenceDetails = async (req, res) => {
     }
 
 exports.addResidencePriceDetails = async(req, res) => {
+
+    const t = await db.sequelize.transaction();
+
     try {
 
-        const result = await sequelize.transaction(async (t) => {
+        const result = await db.sequelize.transaction(async (t) => {
 
             const residencePriceInfo = await db.residencePriceMasterModel.create(req.body.priceInfo, { transaction: t });
 
             const priceDetails = await this.prepareRoomPriceDetail(req.body.roomInfo, residencePriceInfo.residence_price_Id);
 
-            await db.residencePriceDetailsModel.bulkCreate(priceDetails ,  { transaction: t });
+            await db.residencePriceDetailsModel.bulkCreate(priceDetails , { transaction: t });
 
-            await t.commit();
-
+            return residencePriceInfo;
         });
+
+        await t.commit();
             
         successRes(res, result, SUCCESS.CREATED);
     }catch (error){
@@ -90,6 +94,8 @@ exports.addResidenceId = async(arr, residenceId) => {
     array.forEach(element => {
         element.residence_Id = residenceId;
     });
+
+    console.log(array)
 
     return array;
 }

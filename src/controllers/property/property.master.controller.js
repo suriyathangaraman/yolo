@@ -24,21 +24,24 @@ exports.propertyCreate = async (req, res) => {
 
 exports.propertyMap = async (req, res) => {
 
-    const t = await Sequelize.transaction();
+    const t = await db.sequelize.transaction();
 
     try {         
         
-        const result = await sequelize.transaction(async (t) => {
+        const result = await db.sequelize.transaction(async (t) => {
 
             await db.propertyImagesModel.bulkCreate(req.body.propertyImages, { transaction: t });
-            await db.propertyVideosModel.bulkCreate(req.body.propertyImages, { transaction: t });
+            await db.propertyVideosModel.bulkCreate(req.body.propertyVideos, { transaction: t });
             await db.propertyFacilityModel.bulkCreate(req.body.propertyFacilities, { transaction: t });
             const categoryResult = await db.propertyCategoryModel.bulkCreate(req.body.propertyCategories, { transaction: t });
 
-            await t.commit();
+          //  await t.commit();
 
             return categoryResult;
         });
+
+        await t.commit();
+
 
 
         successRes(res, result, SUCCESS.CREATED);

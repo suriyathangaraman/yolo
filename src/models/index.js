@@ -114,7 +114,7 @@ db.residenceVideosModel.belongsTo(db.residenceMasterModel, { foreignKey: 'reside
 db.residenceMasterModel.hasMany(db.residencePriceMasterModel, { foreignKey: 'residence_Id'});
 db.residencePriceMasterModel.belongsTo(db.residenceMasterModel, { foreignKey: 'residence_Id'});
 
-db.residenceMasterModel.hasMany(db.roomMasterModel, { foreignKey: 'residence_Id'});
+db.residenceMasterModel.hasMany(db.roomMasterModel, {  onDelete: 'NO ACTION', onUpdate: 'NO ACTION', foreignKey: 'residence_Id'});
 db.roomMasterModel.belongsTo(db.residenceMasterModel, { foreignKey: 'residence_Id'});
 
 db.residencePriceMasterModel.hasMany(db.residencePriceDetailsModel, { foreignKey: 'residence_price_Id'});

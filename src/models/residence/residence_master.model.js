@@ -13,6 +13,8 @@ module.exports = (sequelize, Sequelize) => {
        },
        property_category_Id: { type: DataTypes.UUID, allowNull: false },
        residence_type_Id: { type: DataTypes.UUID, allowNull: false },
+       floor_number: { type: DataTypes.INTEGER, allowNull: false },
+       total_rooms: { type: DataTypes.INTEGER, allowNull: false },
        status: { type: DataTypes.INTEGER , default :1 }, 
        created_by: { type: DataTypes.STRING},
        modified_by: { type: DataTypes.STRING }

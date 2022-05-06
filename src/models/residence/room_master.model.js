@@ -13,7 +13,8 @@ module.exports = (sequelize, Sequelize) => {
            unique: true,
            allowNull:false
        },
-       residence_numbr: { type: DataTypes.UUID, allowNull: false },
+       residence_Id: { type: DataTypes.UUID, allowNull: false },
+       residence_number: { type: DataTypes.INTEGER, allowNull: false },
        status: { type: DataTypes.INTEGER , default :1 }, 
        created_by: { type: DataTypes.STRING},
        modified_by: { type: DataTypes.STRING }
