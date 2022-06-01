@@ -56,15 +56,24 @@ exports.propertyMap = async (req, res) => {
 
 exports.propertyGet = async (req, res) => {
     try {
+
+        let results;
+
         let query = {};
         query.where = req.query;
         query.attributes = {}
-        let results;
-        if (req.query && req.query.guest_Id) {
-            results = await commonService.findOne(db.propertyMasterModel, query);
-        } else {
-            results = await commonService.findAll(db.propertyMasterModel, query);
+        query.include = [ { model:db.propertyImagesModel }, {model:db.propertyVideosModel}, { model: db.areaModel}];
+        query.raw = false;
+
+        if(req.query && req.query.property_Id){
+
+            results = await commonService.findOne(db.propertyMasterModel, query); 
+
+        }else {
+            results =await commonService.findAll(db.propertyMasterModel, query);
         }
+
+
         successRes(res, results, SUCCESS.LISTED);
     } catch (error) {
         const message = error.message ? error.message : ERRORS.LISTED;

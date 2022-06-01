@@ -118,6 +118,13 @@ exports.get = async (req, res) => {
         let query = {};
         query.where = req.query;
         query.attributes = {}
+        query.raw = false;
+        query.include = [ 
+            { model:db.residenceImagesModel }, 
+            { model:db.residenceVideosModel}, 
+            { model: db.residencePriceMasterModel},
+            { model: db.residenceRooms}
+        ];
         let results;
         if (req.query && req.query.city_Id) {
             results = await commonService.findOne(db.residenceTypeModel, query);

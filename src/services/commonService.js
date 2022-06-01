@@ -37,11 +37,12 @@ exports.findByPk = async (model, query) => {
 // Find only one record
 exports.findOne = async (model, query) => {
     try {
+
         return await model.findOne({
             where: query.where,
             include: query.include,
             attributes: query.attributes,
-            raw: true,
+            raw: query.raw === false ? query.raw : true,
         });
     } catch (error) {
         throw error;
@@ -58,7 +59,7 @@ exports.findAll = async (model, query) => {
             attributes: query.attributes,
             group: query.group,
             order: query.order,
-            raw: true,
+            raw: query.raw === false ? query.raw : true,
         });
     } catch (error) {
         throw error;
